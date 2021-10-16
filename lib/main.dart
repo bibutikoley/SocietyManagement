@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'RouteGenerator.dart';
 
 void main() {
@@ -46,11 +47,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if(MediaQuery.of(context).size.shortestSide > 600) {
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight
-      ]);
+    if (MediaQuery.of(context).size.shortestSide > 600) {
+      SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
     }
     return Scaffold(
       appBar: AppBar(
@@ -58,55 +57,43 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          //
-          //
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            InkWell(
-              onTap: () {
-
-              },
-              child: Text(
-                'You have pushed the button this many times:',
-              ),
+            Text(
+              'You have pushed the button this many times:',
             ),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
-          ],
-        ),
-      ),
-      floatingActionButton: InkWell(
-        onLongPress: () {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text("Test")));
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            FloatingActionButton(
-              onPressed: _incrementCounter,
-              child: Icon(Icons.arrow_upward_rounded),
-            ),
-            SizedBox(
-              width: 12,
-            ),
-            FloatingActionButton(
-              onPressed: _decrementCounter,
-              child: Icon(Icons.arrow_downward_rounded),
-            ),
-            SizedBox(
-              width: 12,
-            ),
-            FloatingActionButton(
-              onPressed: () => {
-                this.setState(() {
-                  _counter = 0;
-                })
-              },
-              child: Icon(Icons.autorenew_rounded),
-            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                FloatingActionButton(
+                  onPressed: _incrementCounter,
+                  child: Icon(Icons.arrow_upward_rounded),
+                ),
+                SizedBox(
+                  width: 12,
+                ),
+                FloatingActionButton(
+                  onPressed: _decrementCounter,
+                  child: Icon(Icons.arrow_downward_rounded),
+                ),
+                SizedBox(
+                  width: 12,
+                ),
+                FloatingActionButton(
+                  onPressed: () => {
+                    this.setState(() {
+                      _counter = 0;
+                    })
+                  },
+                  child: Icon(Icons.autorenew_rounded),
+                ),
+              ],
+            )
           ],
         ),
       ),
