@@ -45,6 +45,32 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _resetCounter() {
+    setState(() {
+      _counter = 0;
+    });
+  }
+
+  void _performAction(ActionType actionType) {
+    switch (actionType) {
+      case ActionType.SUB:
+        {
+          _decrementCounter();
+        }
+        break;
+      case ActionType.ADD:
+        {
+          _incrementCounter();
+        }
+        break;
+      case ActionType.RESET:
+        {
+          _resetCounter();
+        }
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     if (MediaQuery.of(context).size.shortestSide > 600) {
@@ -55,48 +81,66 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                FloatingActionButton(
-                  onPressed: _incrementCounter,
-                  child: Icon(Icons.arrow_upward_rounded),
-                ),
-                SizedBox(
-                  width: 12,
-                ),
-                FloatingActionButton(
-                  onPressed: _decrementCounter,
-                  child: Icon(Icons.arrow_downward_rounded),
-                ),
-                SizedBox(
-                  width: 12,
-                ),
-                FloatingActionButton(
-                  onPressed: () => {
-                    this.setState(() {
-                      _counter = 0;
-                    })
-                  },
-                  child: Icon(Icons.autorenew_rounded),
-                ),
-              ],
-            )
-          ],
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                'You have pushed the button this many times:',
+              ),
+              Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+              ActionButtons(
+                function: _performAction,
+              )
+            ],
+          ),
         ),
       ),
+    );
+  }
+}
+
+class ActionButtons extends StatefulWidget {
+  final Function(ActionType type) function;
+
+  ActionButtons({Key? key, required this.function}) : super(key: key);
+
+  @override
+  _ActionButtonsState createState() => _ActionButtonsState();
+}
+
+enum ActionType { ADD, SUB, RESET }
+
+class _ActionButtonsState extends State<ActionButtons> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        FloatingActionButton(
+          onPressed: () => widget.function(ActionType.ADD),
+          child: Icon(Icons.arrow_upward_rounded),
+        ),
+        SizedBox(
+          width: 12,
+        ),
+        FloatingActionButton(
+          onPressed: () => widget.function(ActionType.SUB),
+          child: Icon(Icons.arrow_downward_rounded),
+        ),
+        SizedBox(
+          width: 12,
+        ),
+        FloatingActionButton(
+          onPressed: () => widget.function(ActionType.RESET),
+          child: Icon(Icons.autorenew_rounded),
+        ),
+      ],
     );
   }
 }
