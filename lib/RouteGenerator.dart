@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:society_management/main.dart';
+import 'package:society_management/screens/LandingPageScreen.dart';
+import 'package:society_management/screens/SplashScreen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoutes(RouteSettings routeSettings) {
     final args = routeSettings.arguments;
     switch (routeSettings.name) {
       case '/': //Initial Route
-        return MaterialPageRoute(
-            builder: (_) => MyHomePage(
-                  title: 'Flutter Demo Home Page',
-                ));
+        return MaterialPageRoute(builder: (_) => SplashScreen());
+
+      case '/landingPage':
+        return MaterialPageRoute(builder: (_) => LandingPageScreen(args));
 
       default: //If none matches show this page
         return _errorRoute();
@@ -23,7 +24,7 @@ class RouteGenerator {
           title: Text('Error'),
         ),
         body: Center(
-          child: Text('ERROR'),
+          child: Text('Page not found'),
         ),
       );
     });
