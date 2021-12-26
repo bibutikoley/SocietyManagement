@@ -30,3 +30,7 @@ class RouteGenerator {
     });
   }
 }
+
+/**
+ * This page is generated with the reference from ResoCoder (https://www.youtube.com/watch?v=nyvwx7o277U)
+ */
