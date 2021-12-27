@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:society_management/utils/Extensions.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Duration(seconds: 4),
         () => {
               Navigator.pushReplacementNamed(context, "/landingPage",
-                  arguments: _generateRandomString())
+                  arguments: "".randomStringWithLimit(5))
             });
   }
 
@@ -31,15 +31,5 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
     );
-  }
-
-  String _generateRandomString() {
-    const _chars =
-        'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-    Random _rnd = Random();
-    String getRandomString(int length) =>
-        String.fromCharCodes(Iterable.generate(
-            length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
-    return getRandomString(5);
   }
 }
