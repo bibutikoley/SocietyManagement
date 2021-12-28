@@ -36,7 +36,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                     text: ((_customMessage ?? widget.argument) ?? '')
                         .toString()
                         .trim(),
-                    style: TextStyle(color: Colors.red),
+                    style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
